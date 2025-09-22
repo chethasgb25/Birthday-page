@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Wifey 🎉</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      /* Purple to pink gradient */
+      background: linear-gradient(135deg, #d291bc, #f6a5c0);
+      color: #333;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-top: 40px;
+      animation: fadeIn 3s ease-in-out;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin: 20px;
+      line-height: 1.6;
+    }
+
+    .quote {
+      font-style: italic;
+      font-size: 1.4rem;
+      margin: 20px 0;
+    }
+
+    .photos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .photos img {
+      width: 200px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: transform 0.5s, box-shadow 0.5s;
+    }
+
+    .photos img:hover {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+
+    .letter {
+      font-family: 'Brush Script MT', cursive;
+      font-size: 1.5rem;
+      margin: 40px 20px;
+      color: #4a2c2a;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 10px;
+      background: #9b59b6;
+      color: white;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: transform 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    .heart, .floatText {
+      position: absolute;
+      font-size: 1.5rem;
+      pointer-events: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    #countdown {
+      font-size: 1.3rem;
+      margin-top: 10px;
+      font-weight: bold;
+      color: #d63447;
+    }
+  </style>
+</head>
+<body>
+  <h1>Happy Birthday My Dearest Wifey🫀🫂😘 </h1>
+  <p class="quote">“In your smile, I find my peace; in your eyes, I see my world.”</p>
+
+  <button id="revealBtn">Open Your Surprise 🎁</button>
+  <p id="surpriseText" style="display:none;">
+    You are the prettiest and cutest girl ever, and I am blessed to have you in my life. 💖<br>
+    In just 2 months, we are gonna hit one year since our relationship was started — and every moment has been magical with you. ✨<br>
+    Tomorrow at 3:00 PM, be ready… because I have a special surprise waiting for you! 😉
+  </p>
+
+  <div id="countdown"></div>
+
+  <!-- Photo gallery with exactly 4 photos -->
+  <div class="photos">
+    <img src="IMG_20250922_214426.jpg" alt="Memory 1">
+    <img src="Snapchat-1549463708.jpg" alt="Memory 2">
+    <img src="Snapchat-971934743.jpg" alt="Memory 3">
+    <img src="Snapchat-437343079.jpg" alt="Memory 4">
+  </div>
+
+  <div class="letter">
+    Coded by your Hubby,<br>
+         ~~ Chethas GB (To) Harshithaa 💌
+  </div>
+
+<!-- First song -->
+<audio id="song1" src="Ehsaas_song____ringtone_(256k).mp3" loop controls autoplay></audio>
+
+<!-- Second song -->
+<audio id="song2" src="Iwannabeyours_ringtone(256k).mp3" loop controls></audio>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <script>
+    // Reveal surprise text on button click
+    const btn = document.getElementById('revealBtn');
+    const text = document.getElementById('surpriseText');
+    btn.addEventListener('click', () => {
+      text.style.display = 'block';
+      btn.style.display = 'none';
+      confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+    });
+
+    // Countdown Timer
+    const countdown = document.getElementById('countdown');
+    const targetDate = new Date();
+    targetDate.setDate(targetDate.getDate() + 1); // tomorrow
+    targetDate.setHours(15,0,0,0); // 3:00 PM
+
+    setInterval(() => {
+      const now = new Date();
+      let diff = targetDate - now;
+      if(diff < 0) diff = 0;
+      const hrs = Math.floor(diff / (1000*60*60));
+      const mins = Math.floor((diff % (1000*60*60)) / (1000*60));
+      const secs = Math.floor((diff % (1000*60)) / 1000);
+      countdown.textContent = `⏳ Time to your surprise: ${hrs}h ${mins}m ${secs}s`;
+    }, 1000);
+
+    // Floating Hearts and Messages
+    function createFloatingElement(symbol, className) {
+      const el = document.createElement('div');
+      el.className = className;
+      el.textContent = symbol;
+      document.body.appendChild(el);
+      return el;
+    }
+
+    function animateElement(el) {
+      const startX = Math.random() * window.innerWidth;
+      const startY = window.innerHeight + 50;
+      const duration = 10000 + Math.random() * 5000;
+
+      el.style.left = startX + 'px';
+      el.style.top = startY + 'px';
+      el.style.opacity = 1;
+      el.style.transition = `transform ${duration}ms linear, opacity ${duration}ms linear`;
+      setTimeout(() => {
+        el.style.transform = `translateY(-${window.innerHeight + 100}px) rotate(${Math.random()*360}deg)`;
+        el.style.opacity = 0;
+      }, 50);
+
+      setTimeout(() => {
+        el.remove();
+      }, duration);
+    }
+
+    setInterval(() => {
+      const heart = createFloatingElement('❤️', 'heart');
+      animateElement(heart);
+    }, 500);
+
+    const messages = ['😘', ' 🥰', ' 💖', '🌸','🫂','🫀'];
+    setInterval(() => {
+      const msg = messages[Math.floor(Math.random() * messages.length)];
+      const floatMsg = createFloatingElement(msg, 'floatText');
+      animateElement(floatMsg);
+    }, 1500);
+
+    // Play/pause song when clicking any photo
+    const song = document.getElementById('song');
+    document.querySelectorAll('.photos img').forEach(img => {
+      img.addEventListener('click', () => {
+        if(song.paused) song.play();
+        else song.pause();
+      });
+    });
+  </script>
+</body>
+</html>
